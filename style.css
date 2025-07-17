@@ -1,0 +1,120 @@
+/* Importando uma fonte mais bonita do Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+/* Reset básicos e estilos globais */
+* {
+    box-sizing: border-box; /* Garante que o padding e border não aumentem o tamanho final do elemento */
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Roboto', sans-serif; /* Define a fonte padrão para toda a página */
+    background-color: #141414; /* Um fundo escuro, estilo Netflix/streaming */
+    color: #FFFFFF; /* Texto branco para contraste */
+}
+
+/* Estliziando Cabeçalho */
+header {
+    padding: 20px;
+    text-align: center;
+    border-bottom: #333; /* Uma linha sutil pra separar*/
+}
+
+header h1 {
+    font-size: 2.5rem;
+    color: #E50914;
+}
+
+/* ================================== */
+/* ESTILOS DO FORMULÁRIO DE PESQUISA  */
+/* ================================== */
+
+#search-form {
+    display: flex; /* Alinha o campo de texto e o botão lado a lado */
+    justify-content: center; 
+    margin-top: 20px;
+    gap: 10px
+}
+
+#search-input {
+    width: 300px; /* Largura do campo de pesquisa */
+    padding: 10px 15px; /* Espaçamento interno(vertical e horizontal) */
+    border-radius: 20px; /* Deixa as bordas bem arredondadas */
+    border: 2px solid #333; /* Uma borda sutil */
+    background-color: #222; /* Fundo escuro */
+    color: #fff; /* Texto branco */
+    font-size: 1rem; /* Tamanho da fonte */
+    outline: none; /* Remove a borda azul que aparce ao clicar */
+}
+
+#search-imput::placeholder {
+    color: #888; /* Cor do texto de dica(placeholder)*/
+}
+
+#search-form button {
+    padding: 10px 20px; /* Espaçamento interno */
+    border-radius: 20px; /* Bordas arredondadas */
+    border: none; /* Remove a borda padrão */
+    background-color: #E50914; /* cor de fundo vermelha, tema do site */
+    color:#fff; /* Texto branco */
+    font-size: 1rem; /* Tamanho da fonte */
+    font-weight: bold; /* Texto em Negrito */
+    cursor: pointer; /* "maozinha" ao passar o mouse por cima */
+    transition: background-color 0.2s; /* Efeito suave na mudança de cor */
+}
+
+#search-form button:hover {
+    background-color: #b20710; /* Um tom de vermelho um pouco mais escuro ao passar o mouse */
+}
+
+/* ========================================= */
+/* FIM DOS ESTILOS DO FORMULÁRIO DE PESQUISA */
+/* ========================================= */
+
+/* Estliziando o container principal dos filmes */
+main {
+    padding: 20px; /*Espaçamento interno para não colar nas bordas da tela*/
+}
+
+#movies-container{
+    display: grid;
+    /* Cria uma grade responsiva: o navegador tentará criar colunas de 200px,
+    preenchendo o espaçi disponível e se ajustando automaticamente */
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px; /* Espaço entre os card dos filmes */
+}
+
+/* Estilos para os cards dos filmes (que serão criados pelo JavaScript) */
+.movie-card {
+    background-color: #1c1c1c;
+    border-radius: 8px; /* Cantos arredondados*/
+    overflow: hidden; /* Garante que a imagem não "vaze" dos cantos arredondados */
+    text-align: center; 
+    transition: transform 0.2s; /* Efeito suave de transição */
+}
+
+.movie-card:hover {
+    transform: scale(1.05); /* Efeito de zoom ao passar o mouse */
+    cursor: pointer;
+}
+
+.movie-poster {
+    width: 100%; /* Faz a imagem do pôster ocupar toda a largura do card */
+    display: block; /* Remove pequenos espaços indesejados abaixo da imagem */
+}
+
+.movie-card p{
+    padding: 10px;
+    font-weight: bold;
+}
+
+/* Estilizando Rodapé */
+footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    border-top: 1px solid #333;
+    color: #888;
+}
+
