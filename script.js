@@ -4,7 +4,7 @@
 
 // Aqui guardamos a chave da API que você pegou no site do TMDb.
 // É uma boa prática colocar valores que não mudam (constantes) em maiúsculas.
-const API_KEY = 'c1cbdb8988439672cf6ce9ff07e406b2'; // <-- IMPORTANTE: Troque pela sua chave
+// const API_KEY está em outro arquivo para que não haja vazamento
 
 // Aqui estamos "pegando" o elemento do nosso HTML que tem o id 'movies-container'.
 // É neste container que vamos adicionar os cards dos filmes.
@@ -15,12 +15,20 @@ const moviesContainer = document.getElementById('movies-container');
 const searchForm = document.getElementById('search-form');
 const searchInput = document.getElementById('search-input');
 
+//selecionar elementos do modal
+const modal = document.getElementById('movie-modal');
+const closeModalButton = document.querySelector('.close-button');
+const modalTitle = document.getElementById('modal-title');
+const modalOverview = document.getElementById('modal-overview');
+const modalRating = document.getElementById('modal-rating');
+
 // Esta é a parte principal da URL da API para buscar os filmes populares.
 // A documentação do TMDb nos diz qual URL usar para cada tipo de informação.
 const API_URL_POPULAR = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=pt-BR`;
 
 //URL para a base de pesquisa dos filmes
 const API_URL_SEARCH_BASE = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=pt-BR&query=`;
+
 
 // ============================================================================
 // PASSO 2: A FUNÇÃO PRINCIPAL PARA BUSCAR E EXIBIR OS FILMES
@@ -63,6 +71,27 @@ async function searchMovies(searchTerm) {
         }
     } catch (error) {
         console.error("Erro ao pesquisar filme:", error)
+    }
+}
+
+//Função para buscar os detalhes de um filme específico e abrir o modal
+async function getMoviesDetails(movieId) {
+    // Monta a URL para buscar detalhes de um filme específico usando o ID
+    const API_URL_DETAILS = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}&language=pt-BR`;
+
+    try {
+        const response = await fetch(API_URL_DETAILS);
+        const movieDetails = await response.json();
+
+        //Preenche os elementos do modal com os dados recebidos
+        modalTitle.textContent = movieDetails.title;
+        modalOverview.textContent = movieDetails.overview;
+        modalRating.textContent = movieDetails.vote_average.toFixed(1); // toFixed(1) formata para 1 casa decimal
+
+        //mostra o modal (muda estilo de none para block)
+        modal.style.display = 'block';
+    } catch (error) {
+        console.error("Erro ao buscar detalhes do filme:", error)
     }
 }
 
@@ -113,6 +142,14 @@ function displayMovies(movies) {
         const movieCard = document.createElement('div');
         movieCard.classList.add('movie-card');
 
+        //adiciona ouvinte de clique a cada card
+        //a função aqui dentro será executada quando o card for clicado
+        movieCard.addEventListener('click', () => {
+            //chama uma nova função para buscar os deatlhes passando o id unico do filme que foi clicado
+            getMoviesDetails(movie.id);
+        });
+            
+
         const poster = document.createElement('img');
         poster.classList.add('movie-poster');
         poster.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
@@ -123,7 +160,6 @@ function displayMovies(movies) {
 
         movieCard.appendChild(poster);
         movieCard.appendChild(title);
-
         moviesContainer.appendChild(movieCard);
        }
     });
@@ -133,7 +169,9 @@ function displayMovies(movies) {
 // PASSO 4: INICIANDO O PROCESSO
 // ============================================================================
 
-
+// Esta é a linha que efetivamente inicia tudo.
+// Assim que o script é carregado, ele chama a função para buscar os filmes.
+getPopularMovies();
 
 //Adicionar um ouvinte de eventos para o formulário de pesquisa.
 searchForm.addEventListener('submit', (event) => {
@@ -156,7 +194,17 @@ searchForm.addEventListener('submit', (event) => {
     }
 });
 
-// Esta é a linha que efetivamente inicia tudo.
-// Assim que o script é carregado, ele chama a função para buscar os filmes.
-getPopularMovies();
+//ouvinte de clique para fechar modal
+closeModalButton.addEventListener('click', () => {
+    modal.style.display = 'none';
+});
+
+//fecha o modal se o usuario clicar fora da janela de conteudo
+window.addEventListener('click', (event) => {
+    if (event.target == modal) {
+        modal.style.display = 'none';
+    }
+});
+
+
 

@@ -25,9 +25,19 @@
         <p>Desenvolvido por Rafael Damaso</p>
     </footer>
 
+
+    <div id="movie-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2 id="modal-title">Título do filme</h2>
+            <p id="modal-overview">Aqui vai a sinopse do filme</p>
+            <p><strong>Nota:</strong> <span id="modal-rating">0.0</span></p>
+        </div>
+    </div>
+    
     <!-- Carrega primeiro o arquivo de configuração com a chave -->
-    <script src="script.js"></script>
-    <!-- Depois carrega o script principal que vai usar a chave -->
     <script src="config.js"></script>
+    <!-- Depois carrega o script principal que vai usar a chave -->
+    <script src="script.js"></script>
 </body>
 </html>
