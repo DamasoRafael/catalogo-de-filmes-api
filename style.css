@@ -21,6 +21,12 @@ header {
     border-bottom: #333; /* Uma linha sutil pra separar*/
 }
 
+h1{
+    font-size: 0.9rem;
+    text-align: center;
+    color: #aaa;
+}
+
 header h1 {
     font-size: 2.5rem;
     color: #E50914;

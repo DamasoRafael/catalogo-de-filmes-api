@@ -1,0 +1,3 @@
+[build]
+  command = "echo \"const API_KEY = '${VITE_TMD_API_KEY}';\" > config.js"
+  publish = "."
