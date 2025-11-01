@@ -2,13 +2,12 @@
 // PASSO 1: CONFIGURAÇÃO INICIAL E VARIÁVEIS GLOBAIS
 // ============================================================================
 
-// Aqui guardamos a chave da API que você pegou no site do TMDb.
-// É uma boa prática colocar valores que não mudam (constantes) em maiúsculas.
+// Aquiguardo a chave da API do site do TMDb.
 // const API_KEY está em outro arquivo para que não haja vazamento
 
-// Aqui estamos "pegando" o elemento do nosso HTML que tem o id 'movies-container'.
-// É neste container que vamos adicionar os cards dos filmes.
-// Usamos 'const' porque essa referência ao container não vai mudar.
+// Aqui "pego" o elemento do nosso HTML que tem o id 'movies-container'.
+// container que adiciona os cards dos filmes.
+// Uso 'const' porque essa referência ao container não vai mudar.
 const moviesContainer = document.getElementById('movies-container');
 
 //Selecionar os elementos do formulário
@@ -37,8 +36,8 @@ const API_URL_SEARCH_BASE = `https://api.themoviedb.org/3/search/movie?api_key=$
 // 'async' antes da palavra 'function' indica que esta função fará operações assíncronas (como esperar a resposta de uma API).
 async function getPopularMovies() {
 
-    // O bloco 'try...catch' é uma forma de lidar com erros. O código dentro do 'try' é executado. Se algum erro acontecer
-    // (ex: a internet caiu, a API está fora do ar), o código dentro do 'catch' é executado, evitando que a página quebre.
+    // O bloco 'try...catch' é uma forma de lidar com erros. O código dentro do 'try' é executado. Se algum erro acontecer,
+    // o código dentro do 'catch' é executado, evitando que a página quebre.
     try {
         // 'fetch()' é a função que faz a requisição para a URL da API. 
         // 'await' pausa a execução DESTA FUNÇÃO até que o 'fetch' receba uma resposta.
@@ -102,8 +101,7 @@ async function getMoviesDetails(movieId) {
 // Esta função recebe uma lista de filmes ('movies') como argumento.
 function displayMovies(movies) {
 
-    // Primeiro, limpamos qualquer conteúdo que já exista no container.
-    // Isso será útil mais tarde, quando formos fazer a busca.
+    // Primeiro, limpa qualquer conteúdo que já exista no container.
     moviesContainer .innerHTML = '';
 
     // 'forEach' é um laço de repetição que passa por cada item do array 'movies'.
